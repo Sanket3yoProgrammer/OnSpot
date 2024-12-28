@@ -5,8 +5,6 @@ const link = "https://neal.fun/";
 
 
 
-appendMessage(BOT_NAME, BOT_IMG, res)
-
 
 const BOT_MSGS = [
   "Hi, how are you?",
