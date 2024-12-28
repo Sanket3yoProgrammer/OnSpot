@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Application</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="light-mode" onload="gpsLocation()">
+
+
+  <div class="instruction-popup" id="instructionPopup">
+    <div class="instruction-popup-content">
+      <h2>Welcome to Location GPT!</h2>
+      <p>
+        <i class="fas fa-moon"></i> Switch between <strong>dark mode</strong> and <strong>light mode</strong> using the theme button.<br>
+        <i class="fas fa-map-marker-alt"></i> Click the <strong>location button</strong> to explore wonders via Street View.<br>
+        <i class="fas fa-globe"></i> Make sure to <span class="important">turn on your GPS</span> or <span class="important">location</span> for a personalized experience.<br>
+        <i class="fas fa-robot"></i> Ask me anything and enjoy the chat experience!
+      </p>
+      <p class="important-note">
+        <strong>Important:</strong> Without enabling <span class="important">GPS</span>, some features may not work as intended. After enabling gps on your device, reload the website!
+      </p>
+      <button id="gotItButton" class="disabled" disabled>Got It!</button>
+    </div>
+  </div>
+  
+
+
+
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title" style="display: flex; align-items: center;">
+        <!-- <i class="fas fa-robot"></i> -->
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg" alt="" class="robo-img">
+         <h2>OnSpot-GPT 1.02-v</h2>
+      </div>
+      <div class="msger-header-options">
+        <button id="theme-toggle" class="theme-btn">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button id="size-btn" class="size-btn" onclick="teleportToTrueSize()">
+          <i class="fas fa-globe-americas"></i> <!-- You can change the icon as needed -->
+        </button>
+        <button id="location-btn" class="location-btn" onclick="teleport()">
+          <i class="fas fa-map-marker-alt"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        <div class="msg-img">
+          <span class="profile-initial">A</span>
+        </div>
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">Admin</div>
+            <div class="msg-info-time"></div>
+          </div>
+          <div class="msg-text">
+            Hi, welcome to OnSpot-GPT 1.02-v!. 📍
+          </div>
+        </div>
+      </div>
+
+      <div class="msg right-msg">
+        <div class="msg-img">
+          <span class="profile-initial">U</span>
+        </div>
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">You</div>
+            <div class="msg-info-time"></div>
+          </div>
+          <div class="msg-text">Thanks! I’m excited to try this out.</div>
+        </div>
+      </div>
+    </main>
+
+
+    <div class="recommendations">
+      <button class="recommendation-btn" onclick="sendRecommendation('Play a game')">Play a game</button>
+      <button class="recommendation-btn" onclick="sendRecommendation('Play Rock Paper Scissors')">Play Rock Paper Scissors</button>
+      <button class="recommendation-btn" onclick="sendRecommendation('Trivia')">Trivia</button>
+      <button class="recommendation-btn" onclick="sendRecommendation('Guess the country')">Guess the country</button>
+      <button class="recommendation-btn" onclick="sendRecommendation('Name a country')">Name a country</button>
+    </div>
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" placeholder="Ask me anything...">
+      <button type="submit" class="msger-send-btn">Send</button>
+    </form>
+  </section>
+  <p id="techchip"></p>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+
+  themeToggle.addEventListener("click", () => {
+    const body = document.body;
+    const isDarkMode = body.classList.toggle("dark-mode");
+    body.classList.toggle("light-mode", !isDarkMode);
+    
+    const icon = themeToggle.querySelector("i");
+    icon.className = isDarkMode ? "fas fa-moon" : "fas fa-sun";
+  });
+});
+
+
+function teleport() {
+      window.location.href = "https://neal.fun/wonders-of-street-view/"; 
+    }
+
+function formatDate(date) {
+     return date.toLocaleTimeString(); // Example implementation
+   }
+
+   function closePopup() {
+      document.getElementById("instructionPopup").style.display = "none";
+    }
+  </script>
+
+
+
+
+
+<script>
+  // Check if location is enabled
+  function gpsLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Enable the "Got It" button if GPS is on
+          const button = document.getElementById("gotItButton");
+          button.disabled = false;
+          button.classList.remove("disabled");
+          button.classList.add("enabled");
+          button.addEventListener("click", closePopup); // Allow access when clicked
+        },
+        (error) => {
+          console.log("Location access denied or unavailable.");
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+
+  // Close the popup
+  function closePopup() {
+    document.getElementById("instructionPopup").style.display = "none";
+  }
+
+  function sendRecommendation(recommendation) {
+    const msgText = recommendation;
+    appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+    
+    switch (msgText) {
+        case 'Play Rock Paper Scissors':
+            playRockPaperScissors();
+            break;
+        case 'Trivia':
+            playTrivia();
+            break;
+        case 'Guess the country':
+            guessTheCountry();
+            break;
+        case 'Name a country':
+            nameACountry();
+            break;
+        default:
+            botResponse(msgText);
+    }
+}
+
+function teleportToTrueSize() {
+  // Redirect to a website that shows the true size of countries
+  window.location.href = "https://thetruesize.com/"; 
+  }
+</script>
+
+</body>
+</html>

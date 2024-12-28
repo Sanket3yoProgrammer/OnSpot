@@ -1,0 +1,476 @@
+/* General Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.robo-img {
+  position: relative;
+  display: flex;
+  align-self: left;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+body.light-mode {
+  background: linear-gradient(135deg, #f4f4f8, #ffffff);
+  color: #333;
+}
+
+body.dark-mode {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+}
+
+.msger {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  height: 80vh; /* Fixed height */ 
+  transition: transform 0.3s ease; /* yo */
+}
+
+.msger-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #6a11cb;
+  color: white;
+}
+
+.msger-header-options .theme-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.msger-header-options .theme-btn:hover {
+  transform: rotate(30deg);
+}
+
+.msger-chat {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: var(--chat-bg, #f4f4f8);
+  transition: background 0.3s ease;
+  height: 100%; /* Ensure full height */
+}
+
+body.dark-mode .msger-chat {
+  --chat-bg: #1a1a1a;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.msg.left-msg {
+  justify-content: flex-start;
+}
+
+.msg.right-msg {
+  justify-content: flex-end;
+}
+
+.msg-img {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.msg.left-msg .msg-img {
+  order: 0;
+}
+
+.msg.right-msg .msg-img {
+  order: 1;
+}
+
+.msg-bubble {
+  max-width: 70%;
+  padding: 10px;
+  background: var(--bubble-bg, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: scaleIn 0.5s ease forwards;
+}
+
+body.dark-mode .msg-bubble {
+  --bubble-bg: #333;
+}
+
+.msg-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+}
+
+.msg-info-name {
+  font-weight: bold;
+  color: #8b4ffa;
+}
+
+.msg-info-time {
+  color: #999;
+}
+
+.msg-text {
+  font-size: 1rem;
+}
+
+/* Input Area */
+.msger-inputarea {
+  display: flex;
+  padding: 10px;
+  background: #ffffff;
+  transition: background 0.3s ease;
+}
+
+body.dark-mode .msger-inputarea {
+  background: #1a1a1a;
+}
+
+.msger-input {
+  flex: 1;
+  border: 2px solid #6a11cb;
+  border-radius: 25px;
+  padding: 10px 15px;
+  font-size: 1rem;
+}
+
+.msger-send-btn {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.msger-send-btn:hover {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+
+/* Scrollable Chat */
+.msger-chat::-webkit-scrollbar {
+  width: 6px;
+}
+
+.msger-chat::-webkit-scrollbar-thumb {
+  background-color: #6a11cb;
+}
+
+.msger-chat::-webkit-scrollbar-track {
+  background-color: #f4f4f8;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+
+.location-btn {
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #29b8b8;
+  border: none;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location-btn i {
+  font-size: 1.2em;
+}
+
+.location-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+.location-btn:focus {
+  outline: none;
+  transform: scale(1.3);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+}
+
+
+
+.size-btn {
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #23cc23;
+  border: none;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.size-btn i {
+  font-size: 1.2em;
+}
+
+.size-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+.size-btn:focus {
+  outline: none;
+  transform: scale(1.3);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Disabled button styling */
+  #gotItButton.disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    pointer-events: none;
+    border: none;
+  }
+
+  /* Enabled button styling */
+  #gotItButton.enabled {
+    background-color: #1a73e8;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #gotItButton.enabled:hover {
+    background-color: #0c5dc1;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .instruction-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .instruction-popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: #333;
+    position: relative;
+  }
+
+  .instruction-popup h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #1a73e8; /* Google Blue */
+    font-weight: bold;
+  }
+
+  .instruction-popup p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #5f6368;
+    margin: 15px 0;
+    text-align: left;
+  }
+
+  .instruction-popup p i {
+    color: #1a73e8;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+
+  .instruction-popup p .important {
+    color: #d32f2f; /* Red color for emphasis */
+    font-weight: bold;
+    background: #ffe8e8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .instruction-popup p.important-note {
+    background: #fff6d4;
+    border-left: 5px solid #fbbc04;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .instruction-popup button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .instruction-popup button:hover {
+    background-color: #0c5dc1;
+  }
+
+  /* Animation for smooth entry */
+  .instruction-popup-content {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+
+
+
+
+
+  .recommendations {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    margin-top: 7px;
+  }
+  
+  .recommendation-btn {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .recommendation-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+  }
+  
+  .recommendation-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+  }
